@@ -1,0 +1,8 @@
+export {default as Home} from './Home'
+export {default as Login} from './Login'
+export {default as Header} from './Header'
+export {default as Navigation} from './Navigation'
+export {default as Homepage} from './Homepage'
+export {default as TinTuc} from './TinTuc'
+export {default as Pagination} from './Pagination'
+export {default as DetailPost} from './DetailPost'
