@@ -37,3 +37,61 @@ import * as postService from  '../services/post'
         })
     }
 }
+
+export const updatePost = async (req, res) => {  
+    try {
+        if (!req.body.id){
+            return res.status(400).json({
+                err: 1,
+                msg: 'Not id post'
+            })
+        } 
+        const data = req.body;
+        const response = await postService.updatePostService(data)
+        return res.status(200).json(response)
+
+    } catch (error) {
+        return res.status(500).json({
+            err: -1,
+            msg: 'Fail at auth controller: ' + error
+        })
+    }
+}
+
+export const deletePost = async (req, res) => {
+    
+    try {
+        if (!req.body.id){
+            return res.status(400).json({
+                err: 1,
+                msg: 'Not id post'
+            })
+        } 
+        const response = await postService.deletePostService(req.body.id)
+        return res.status(200).json(response)
+
+    } catch (error) {
+        return res.status(500).json({
+            err: -1,
+            msg: 'Fail at auth controller: ' + error
+        })
+    }
+}
+
+export const createPost = async (req, res) => {
+    const data = req.body
+    try {
+        if (!data) return res.status(400).json({
+            err: 1,
+            msg: 'Missing inputs !'
+        })
+        const response = await postService.createPostService(data)
+        return res.status(200).json(response)
+
+    } catch (error) {
+        return res.status(500).json({
+            err: -1,
+            msg: 'Fail at auth controller: ' + error
+        })
+    }
+}

@@ -17,13 +17,9 @@ module.exports = (sequelize, DataTypes) => {
   }
   Post.init({
     title: DataTypes.STRING,
-    star: DataTypes.STRING,
-    labelCode: DataTypes.STRING,
-    address: DataTypes.STRING,
-    attributesId: DataTypes.STRING,
-    categoryCode: DataTypes.TEXT,
+    content: DataTypes.TEXT,
     userId: DataTypes.INTEGER,
-    overviewId: DataTypes.STRING,
+    voucherId: DataTypes.INTEGER,
     imagesId: DataTypes.INTEGER,
   }, {
     sequelize,

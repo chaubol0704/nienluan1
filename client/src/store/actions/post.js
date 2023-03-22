@@ -1,5 +1,5 @@
 import actionTypes from './actionTypes'
-import { apiGetPosts, apiGetPostsLimit } from '../../services/post'
+import { apiGetPosts, apiGetPostsLimit, apiGetNewPosts } from '../../services/post'
 export const getPosts = () => async (dispatch) =>{
     try {
         const respone = await apiGetPosts()
@@ -50,3 +50,32 @@ export const getPostsLimit = (page) => async (dispatch) =>{
         })
     }
 }
+export const getNewPosts = () => async (dispatch) =>{
+    try {
+        const respone = await apiGetNewPosts()
+        if (respone?.data.msg  === "OK"){
+            dispatch({
+                // truyền mảng lưu trong redux
+                type: actionTypes.GET_NEW_POSTS,
+                data: respone.data
+
+            })
+        }
+        else {
+             dispatch({
+                type: actionTypes.GET_NEW_POSTS,
+                msg: respone.data.msg
+            })
+        }
+    } catch (error) {
+        dispatch({
+            type: actionTypes.GET_NEW_POSTS,
+            posts:null
+        })
+    }
+}
+
+export const editPost = (dataEdit)  =>({
+    type: actionTypes.EDIT_POST,
+    dataEdit
+})

@@ -8,7 +8,19 @@ const actionTypes = {
 
 
     GET_POSTS: "GET_POSTS",
+    GET_NEW_POSTS: "GET_NEW_POSTS",
     GET_POSTSLIMIT: "GET_POSTSLIMIT",
+    EDIT_POST: "EDIT_POST",
+
+    // user
+    GET_CURRENT: 'GET_CURRENT',
+    GET_USER: "GET_USER",
+    EDIT_USER: 'EDIT_USER',
+
+    //menu
+    GET_MENU: "GET_MENU",
+    GET_MENU_LIMIT: "GET_MENU_LIMIT",
+    EDIT_MENU: 'EDIT_MENU',
 }
 
 export default actionTypes

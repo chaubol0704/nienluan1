@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 
-const Button = ({text, textColor, bgColor, onClick,fullWidth,px}) => {
+const Button = ({text, textColor, bgColor,IcAfter, onClick,fullWidth,px}) => {
     
     
     return (
@@ -12,6 +12,7 @@ const Button = ({text, textColor, bgColor, onClick,fullWidth,px}) => {
            <span>
                 {text}
             </span> 
+            <span>{IcAfter && <IcAfter />}</span>
         </button>
     );
 }

@@ -12,26 +12,14 @@ module.exports = {
       title: {
         type: Sequelize.STRING
       },
-      star: {
-        type: Sequelize.STRING
-      },
-      labelCode: {
-        type: Sequelize.STRING
-      },
-      address: {
-        type: Sequelize.STRING
-      },
-      attributesId: {
-        type: Sequelize.STRING
-      },
-      categoryCode: {
+      content: {
         type: Sequelize.TEXT
       },
       userId: {
         type: Sequelize.INTEGER
       },
-      overviewId: {
-        type: Sequelize.STRING
+      voucherId: {
+        type: Sequelize.INTEGER
       },
       imagesId: {
         type: Sequelize.INTEGER

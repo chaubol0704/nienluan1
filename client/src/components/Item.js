@@ -1,13 +1,15 @@
 import React,{ memo } from 'react'
 import {  useNavigate, Link } from 'react-router-dom'
-
-const images = []
+import { path } from '../ultils/constant'
+import { DetailPost } from '../containers/Public'
 
 const Item = ({image,title, id}) => {
   // const navigate = useNavigate()
+  // console.log(id)
+
   return (
     <div className='w-full flex items-center p-10 ml-10'>
-        <Link to={`chi_tiet/${title}/${id}`} 
+        <Link to= {`/chi-tiet/${title}/${id}`} 
             className='w-2/5'>          
             <img src={image}          
                 alt=""

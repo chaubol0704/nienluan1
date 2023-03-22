@@ -6,14 +6,18 @@ require('dotenv').config()
 
 const hashPassword = password => bcrypt.hashSync(password, bcrypt.genSaltSync(12))
 
-export const registerService = ({ phone, password, name }) => new Promise(async (resolve, reject) => {
+export const registerService = (payload) => new Promise(async (resolve, reject) => {
+    console.log(payload)
     try {
         const response = await db.Khachhang.findOrCreate({
-            where: { phone },
+            where: { phone: payload.phone },
             defaults: {
-                phone,
-                name,
-                password: hashPassword(password),
+                phone: payload.phone,
+                name: payload.name,
+                password: hashPassword(payload.password),
+                email: payload.email,
+                dia_chi: payload.dia_chi,
+                gender: payload.gender,
                 id: v4()
             }
         })
@@ -29,6 +33,8 @@ export const registerService = ({ phone, password, name }) => new Promise(async 
     }
 })
 
+
+
 export const loginService = ({ phone, password }) => new Promise(async (resolve, reject) => {
     try {
         const response = await db.Khachhang.findOne({
@@ -43,6 +49,86 @@ export const loginService = ({ phone, password }) => new Promise(async (resolve,
             token: token || null
         })
 
+    } catch (error) {
+        reject(error)
+    }
+})
+export const updateUserService = (data) => new Promise(async (resolve, reject) => {
+    try {
+            if (!data.id) {
+                resolve({
+                    err: 1,
+                    message: 'not id'
+                })
+            }
+            console.log(data)
+            const checkUser = await db.Khachhang.findOne({
+                where: {id: data.id},
+                raw: false
+            })
+            if (!checkUser) {
+                resolve({
+                    err: 1,
+                    msg: 'The user is not defined'
+                })
+            }
+           
+                checkUser.name= data.name;
+                checkUser.dia_chi= data.dia_chi;
+                checkUser.email= data.email;
+  
+            
+
+            await checkUser.save()
+            resolve({
+                err: 0,
+                msg: 'updated SUCCESS',
+            })
+        } catch (e) {
+            reject(e)
+        }
+})
+export const deleteUserService = (userId) => new Promise(async (resolve, reject) => {
+    try {   
+            
+            const user = await db.Khachhang.findOne({
+                where: {id: userId}
+            })
+            if (!user) {
+                resolve({
+                    err: 2,
+                    msg: 'The user is not defined'
+                })
+            }
+
+            await user.destroy();
+            
+            resolve({
+                err: 0,
+                msg: 'deleted SUCCESS',
+            })
+        } catch (e) {
+            reject(e)
+        }
+})
+
+export const getUserService = () => new Promise(async(resolve, reject) => {
+    try {
+        const respone = await db.Khachhang.findAll({
+            raw: true,
+            nest: true,
+            // include: [
+            //     {model: db.Image, as: 'images', attributes: ['image']},
+            //     {model: db.Nhanvien, as: 'nhanvien', attributes: ['name','phone']}
+            // ],
+            // attributes: ['id', 'name','dia_chi','phone']
+        }) 
+     
+        resolve({
+            error: respone ? 0:1,
+            msg: respone? 'OK': 'Get post fail.',
+            respone
+        })
     } catch (error) {
         reject(error)
     }

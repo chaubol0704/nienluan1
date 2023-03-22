@@ -6,8 +6,12 @@ const initState = {
     isLoggedIn: false,
     token: null,
     msg: '',
-    update: false
+    user: [], 
+    count_user: 0,
+    update: false,
+    dataEdit: {}
 }
+
 
 const authReducer = (state = initState, action) => {
     switch(action.type){
@@ -16,7 +20,7 @@ const authReducer = (state = initState, action) => {
             
             return{
                 ...state,
-                isLoggedIn: true,
+                isLoggedIn: false,
                 token: action.data,
                 msg:''
             }
@@ -34,6 +38,17 @@ const authReducer = (state = initState, action) => {
                 isLoggedIn:false,
                 token: null,
                 msg:''
+            }
+        case actionTypes.GET_USER:
+           return{
+            ...state,
+            user: action.data.respone || [],
+            msg: action.data.msg || ''
+           }
+        case actionTypes.EDIT_USER:
+            return{
+                ...state,
+                dataEdit: action.dataEdit || {}
             }
         default:
             return state;

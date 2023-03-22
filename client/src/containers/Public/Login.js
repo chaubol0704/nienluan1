@@ -70,11 +70,11 @@ const Login = () => {
         return invalids
     }
     return (
-        <div className='w-full flex items-center justify-center'>
-            <div className='bg-white w-[600px] p-[30px] pb-[100px] rounded-md shadow-sm mt-8'>
+        <div className='w-full flex items-center justify-center relative'>
+            <div className='bg-white w-[600px] p-[30px] pb-[100px] rounded-md shadow-sm mt-8 '>
                 <h3 className='font-semibold text-2xl mb-3'>{isRegister? 'Dang ky tai khoan': 'Đăng nhập'}</h3>
 
-                <div className='w-full flex flex-col gap-3 mb-7'>
+                <div className='w-full flex flex-col gap-3 mb-7 '>
                     {isRegister && <InputForm setInvalidFields={setInvalidFields} invalidFields={invalidFields} label={'Ho ten'} value={payload.name} setvalue={setPayload} keyPayload={'name'}/>}
                      <InputForm setInvalidFields={setInvalidFields} invalidFields={invalidFields} label={'Phone number'} value={payload.phone} setvalue={setPayload} keyPayload={'phone'}/>
                      <InputForm setInvalidFields={setInvalidFields} invalidFields={invalidFields} label={'Password'} value={payload.password} setvalue={setPayload} keyPayload={'password'} type='password'/>

@@ -2,18 +2,24 @@ import React, {useEffect, memo}from 'react';
 import { Item } from '../../components';
 import { getPosts,getPostsLimit } from '../../store/actions/post';
 import {useDispatch, useSelector} from 'react-redux'
+import { useSearchParams} from 'react-router-dom';
 
 
-const TinTuc = ({page}) => {
+const TinTuc = () => {
     const dispatch = useDispatch()
+    const [searchParams] = useSearchParams()
     const {posts} = useSelector((state) => state.post)
+    let page = searchParams.get('page')
+    // console.log(page)
     useEffect(() =>{
+        
         // dispatch(getPosts())
-        let offset = page ? +page - 1 : 0
+        let offset = page ? +page : 1
         dispatch(getPostsLimit(offset))
     },[page])
+    // console.log(posts)
     return (
-        <div className='w-full border border-blue-600 '>
+        <div className='w-full border '>
             <div className='items'>
                
                 {posts?.length>0 && posts.map(item => {
