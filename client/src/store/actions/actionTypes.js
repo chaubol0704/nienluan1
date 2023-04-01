@@ -21,6 +21,10 @@ const actionTypes = {
     GET_MENU: "GET_MENU",
     GET_MENU_LIMIT: "GET_MENU_LIMIT",
     EDIT_MENU: 'EDIT_MENU',
+
+    // order
+    GET_ORDER: 'GET_ORDER',
+
 }
 
 export default actionTypes

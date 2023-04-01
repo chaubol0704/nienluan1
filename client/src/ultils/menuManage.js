@@ -4,14 +4,14 @@ const {ImPencil2} = icons
 const menuManage = [
     {
         id: 1,
-        text: 'Quản lý',
-        path: '/he-thong/thong-tin-tai-khoan',
+        text: 'Quản lý tài khoản',
+        path: '/account/profile',
     },
 
     {
-        id: 3,
-        text: 'Thông tin tài khoản',
-        path: '/he-thong/thong-tin-tai-khoan',
+        id: 2,
+        text: 'Đơn đặt ',
+        path: '/account/order',
     }
 ]
 

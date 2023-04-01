@@ -280,42 +280,42 @@ const SectionThucdon = () => {
                     </div>
                     </div>
                     <div className="col medium-6 small-12 large-6 w-2/5 ">
-                    <div className="col-inner">
-                        <h3 className="alt-font">
-                        <span style={{ fontSize: "130%", color: "#000000" }}>
-                            Korea Cousine
-                        </span>
-                        </h3>
-                        <div
-                        className="gap-element"
-                        style={{ display: "block", height: "auto", paddingTop: 14 }}
-                        />
-                        <p style={{ textAlign: "left" }}>
-                        <span style={{ fontSize: "95%" }}>
-                            Khi nói đến Hàn Quốc, ẩm thực là nét văn hóa đặc trưng không thể bỏ
-                            qua và thịt nướng Hàn Quốc luôn được “truyền tai” về độ tươi ngon,
-                            đậm đà qua những trang cẩm nang du lịch hay những bộ phim Hàn gây
-                            bão.
-                        </span>
-                        </p>
-                        <p style={{ textAlign: "left" }}>
-                        <span style={{ fontSize: "95%" }}>
-                            Sốt chấm Ssamjang cay nồng thường được dùng để ăn kèm với các loại
-                            thịt nướng.{" "}
-                            <em>
-                            Đó là hỗn hợp được trộn giữa tương đậu và tương ớt lên men..
-                            </em>
-                            mỗi khi thịt chín ruộm, người ta phết một chút sốt lên bề mặt miếng
-                            thịt, cuộn cùng với kim chi, xà lách xoăn, dưa chuột. Cho tất cả vào
-                            miệng và nhai kỹ bạn sẽ cảm nhận được ngay hương vị đặc biệt của
-                            loại tương này.
-                        </span>
-                        </p>
-                    </div>
+                        <div className="col-inner">
+                            <h3 className="alt-font">
+                            <span style={{ fontSize: "130%", color: "#000000" }}>
+                                Korea Cousine
+                            </span>
+                            </h3>
+                            <div
+                            className="gap-element"
+                            style={{ display: "block", height: "auto", paddingTop: 14 }}
+                            />
+                            <p style={{ textAlign: "left" }}>
+                            <span style={{ fontSize: "95%" }}>
+                                Khi nói đến Hàn Quốc, ẩm thực là nét văn hóa đặc trưng không thể bỏ
+                                qua và thịt nướng Hàn Quốc luôn được “truyền tai” về độ tươi ngon,
+                                đậm đà qua những trang cẩm nang du lịch hay những bộ phim Hàn gây
+                                bão.
+                            </span>
+                            </p>
+                            <p style={{ textAlign: "left" }}>
+                            <span style={{ fontSize: "95%" }}>
+                                Sốt chấm Ssamjang cay nồng thường được dùng để ăn kèm với các loại
+                                thịt nướng.{" "}
+                                <em>
+                                Đó là hỗn hợp được trộn giữa tương đậu và tương ớt lên men..
+                                </em>
+                                mỗi khi thịt chín ruộm, người ta phết một chút sốt lên bề mặt miếng
+                                thịt, cuộn cùng với kim chi, xà lách xoăn, dưa chuột. Cho tất cả vào
+                                miệng và nhai kỹ bạn sẽ cảm nhận được ngay hương vị đặc biệt của
+                                loại tương này.
+                            </span>
+                            </p>
+                        </div>
                     </div>
                     
                 </div>
-                <div className="row row-small flex pl-12 pt-5 pr-40 ml-20 gap-5 5/10">
+                <div className="row row-small flex pl-12 pt-5 pr-40 ml-20 gap-5 5/10 ">
                     <div className="col medium-3 small-6 large-3">
                     <div className="col-inner">
                         <div
@@ -419,7 +419,7 @@ const SectionThucdon = () => {
                     </div>
                     
                 </div>
-                </div>
+            </div>
 
         </>
         

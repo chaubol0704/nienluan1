@@ -23,9 +23,9 @@ const CreateNew = ({po,cus,me,setIsCreate}) => {
             {/* <FormPost isCreate  setIsCreate={setIsCreate}/> */}
             {/* <FormCreat isCreate  setIsCreate={setIsCreate}/> */}
             
-            {cus & <FormCreat isCreate  setIsCreate={setIsCreate}/> }
-            {po & <FormPost isCreate  setIsCreate={setIsCreate}/>}
-            {me & <FormMenu isCreate  setIsCreate={setIsCreate}/>}
+            {cus && <FormCreat isCreate  setIsCreate={setIsCreate}/> }
+            {po && <FormPost isCreate  setIsCreate={setIsCreate}/>}
+            {me && <FormMenu isCreate  setIsCreate={setIsCreate}/>}
         </div>
     </div>
   )

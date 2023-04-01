@@ -4,6 +4,7 @@ import { CreateNew, Update, Search } from '../../../components'
 import { useSearchParams} from 'react-router-dom';
 import { Pagination } from '../../Public'
 import * as actions from '../../../store/actions'
+import { apiDeleteMenu } from '../../../services';
 
 
 const ManageMenu = () => {
@@ -15,6 +16,7 @@ const ManageMenu = () => {
   let me = true
   const [isEditing, setIsEditing] = useState(false);
   const [isCreate, setIsCreate] = useState(false);
+  const [isDelete, setIsDelete] = useState(false);
   // hứng data từ component
   const [dataEdit, setDataEdit] = useState({});
    const changeHandleSearch = (q) => {         
@@ -25,12 +27,18 @@ const ManageMenu = () => {
         // dispatch(getMenu())
         let offset = page? +page : 1
         dispatch(actions.getMenuLimit({offset , ten_mon: keyword}))
-    },[page,isEditing,isCreate, keyword])
+    },[page,isEditing,isCreate,isDelete, keyword])
   // useEffect(() => {
   //   dispatch(actions.getPosts())
     
   // }, [isEditing,isCreate]);
   // console.log(posts)
+  const handleDelete= async(item) => {
+    // console.log(item.id)
+    setIsDelete(true)
+    const respone = await apiDeleteMenu({id:item.id})
+    setIsDelete(false)
+  }
   return (
     <div>
       <div className='py-4 m-10 border-b border-gray-200 flex items-center justify-between'>
@@ -92,7 +100,9 @@ const ManageMenu = () => {
                           >
                               Sửa
                           </button>
-                          <button className='bg-red-300'>
+                          <button className='bg-red-300'
+                           onClick={() => handleDelete(item)}
+                          >
                               Xóa
                           </button>
                         </td>

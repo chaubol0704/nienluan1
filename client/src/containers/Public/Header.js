@@ -29,7 +29,7 @@ const Header = () => {
         headerRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }, [searchParams.get('page')])
     return (
-        <div ref={headerRef}  className='w-full relative flex items-center justify-center bg-black gap-7 '>
+        <div ref={headerRef}  className='w-full relative flex items-center justify-center bg-black gap-7 z-50 '>
             <Link to={'/'} >
                 <img
                             src={logo}
@@ -55,7 +55,7 @@ const Header = () => {
                         />
                     </div>}
                  {isLoggedIn && 
-                    <div className='flex items-center  relative gap-1'>
+                    <div className='flex items-center  relative gap-1 z-50'>
                         <User />
                         
                         <Button

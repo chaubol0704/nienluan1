@@ -1,4 +1,5 @@
 import axiosConfig from '../axiosConfig'
+import axios from 'axios'
 
 export const apiGetMenu = () =>new Promise(async(resolve, reject)=> {
     try {
@@ -56,6 +57,22 @@ export const apiCreateMenu = (payload) => new Promise(async (resolve, reject) =>
         })
         resolve(response)
 
+    } catch (error) {
+        reject(error)
+    }
+})
+
+export const apiDeleteMenu = (id) =>new Promise(async(resolve, reject)=> {
+    try {
+        console.log(id)
+        const respone = await axiosConfig({
+            method: 'delete',
+            // url: `/api/v1/menu/limit?page=${page}`,
+            url: `/api/v1/menu/delete-menu`,
+            data: id
+            
+        })
+        resolve(respone)
     } catch (error) {
         reject(error)
     }

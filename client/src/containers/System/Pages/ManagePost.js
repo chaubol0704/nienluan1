@@ -4,6 +4,7 @@ import { CreateNew, Update } from '../../../components'
 import { useSearchParams} from 'react-router-dom';
 import { Pagination } from '../../Public'
 import * as actions from '../../../store/actions'
+import { apiDeletePost } from '../../../services';
 
 
 const ManagePost = () => {
@@ -14,6 +15,7 @@ const ManagePost = () => {
   let po = true
   const [isEditing, setIsEditing] = useState(false);
   const [isCreate, setIsCreate] = useState(false);
+  const [isDelete, setIsDelete] = useState(false);
   // hứng data từ component
   const [dataEdit, setDataEdit] = useState({});
   useEffect(() =>{
@@ -26,6 +28,12 @@ const ManagePost = () => {
     
   // }, [isEditing,isCreate]);
   // console.log(posts)
+  const handleDelete= async(item) => {
+    // console.log(item.id)
+    setIsDelete(true)
+    const respone = await apiDeletePost({id:item.id})
+    setIsDelete(false)
+  }
   return (
     <div>
       <div className='py-4 m-10 border-b border-gray-200 flex items-center justify-between'>
@@ -81,7 +89,9 @@ const ManagePost = () => {
                           >
                               Sửa
                           </button>
-                          <button className='bg-red-300'>
+                          <button className='bg-red-300'
+                            onClick={() => handleDelete(item)}
+                          >
                               Xóa
                           </button>
                         </td>

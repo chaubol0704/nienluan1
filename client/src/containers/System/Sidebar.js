@@ -1,11 +1,22 @@
-import React from 'react'
+import {AppstoreOutlined,ShopOutlined,ShoppingCartOutlined,UserOutlined,}  from "@ant-design/icons"
+import { Menu } from "antd"
+import { useEffect, useState } from "react"
+import { useLocation, useNavigate } from "react-router-dom"
 import { useSelector } from 'react-redux'
 const anonAvatar = 'https://www.kindpng.com/picc/m/22-223863_no-avatar-png-circle-transparent-png.png'
-
 
 const Sidebar = () => {
   const {currentData} = useSelector(state => state.user)
   console.log(currentData)
+  const location = useLocation();
+  const [selectedKeys, setSelectedKeys] = useState("/he-thong");
+
+  useEffect(() => {
+    const pathName = location.pathname;
+    setSelectedKeys(pathName);
+  }, [location.pathname]);
+
+  const navigate = useNavigate();
   return (
     <div className='w-[256px] flex-none p-4'> 
       <div>
@@ -21,6 +32,32 @@ const Sidebar = () => {
       </span>
       </div>
       
+
+      <div className="py-5 flex flex-col ">
+      <Menu
+        className="SideMenuVertical"
+        mode="vertical"
+        onClick={(item) => {
+          //item.key
+          navigate(item.key);
+        }}
+        selectedKeys={[selectedKeys]}
+        items={[
+          {
+            label: "Thông tin tài khoản",
+            icon: <AppstoreOutlined />,
+            key: "/account/profile",
+          },
+          {
+            label: "Đơn",
+            key: "/account/order",
+            icon: <ShopOutlined />,
+          },
+          
+          
+        ]}
+      ></Menu>
+    </div>
     </div>
   )
 }

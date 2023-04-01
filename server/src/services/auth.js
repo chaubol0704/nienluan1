@@ -76,8 +76,9 @@ export const updateUserService = (data) => new Promise(async (resolve, reject) =
                 checkUser.name= data.name;
                 checkUser.dia_chi= data.dia_chi;
                 checkUser.email= data.email;
-  
-            
+                checkUser.phone= data.phone;
+              if(data.password)  checkUser.password=hashPassword(data.password) ;
+                // checkUser.email= data.email;
 
             await checkUser.save()
             resolve({

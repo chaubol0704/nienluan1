@@ -12,8 +12,10 @@ export const path = {
     DETAIL_POST: 'chi-tiet/:title/:postId',
     DETAIL: 'chi-tiet/*',
 
-    SYSTEM: '/he-thong/*',
-    CREATE_POST : 'tao-moi-tin-dang',
+    ACCOUNT: '/account/*',
+    ORDER : 'order',
+    PROFILE : 'profile',
+    
 
     //menu
     MENU: 'menu/',
@@ -22,5 +24,7 @@ export const path = {
     CUSTOMERS  : 'customers',
     MANAGE_POST: 'manage-post',
     MANAGE_MENU: 'manage-menu',
+
+    BOOKING: 'booking',
     
 }

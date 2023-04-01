@@ -1,15 +1,40 @@
-import React from "react";
+import React, {useState, useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux'
+import { Form,  Input, Select, Space ,Button,Checkbox} from "antd";
+import bcrypt from 'bcryptjs'
+import { apiUpdateUser } from '../../services';
 
 export default function ModalUser() {
-  const [showModal, setShowModal] = React.useState(false);
+  const {currentData} = useSelector(state => state.user)
+  const [payload, setPayload] =useState(() => {
+      const initData = {
+         name: currentData?.name ,
+         email: currentData?.email ,
+         dia_chi: currentData?.dia_chi ,
+         gender: currentData?.gender ,
+         phone: currentData?.phone  ,
+         password: currentData?.password,
+        id: currentData?.id || '',
+      }
+     
+      return initData
+  })
+  const checkpassword = (value) => {
+    let isCorrectPassword = bcrypt.compareSync(value, currentData.password)
+      console.log(value)
+      // console.log(password)
+      console.log(isCorrectPassword)
+      return isCorrectPassword
+  }
+  const [showModal, setShowModal] = useState(false);
   return (
-    <>
+    <div>
       <button
-        className="bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+        className="bg-green-600 text-white active:bg-green-600 font-bold  px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
         type="button"
         onClick={() => setShowModal(true)}
       >
-        Open large modal
+        Thay đổi mật khẩu
       </button>
       {showModal ? (
         <>
@@ -22,7 +47,7 @@ export default function ModalUser() {
                 {/*header*/}
                 <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
                   <h3 className="text-3xl font-semibold">
-                    Modal Title
+                    Đổi mật khẩu
                   </h3>
                   <button
                     className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
@@ -35,37 +60,118 @@ export default function ModalUser() {
                 </div>
                 {/*body*/}
                 <div className="relative p-6 flex-auto">
-                  <p className="my-4 text-slate-500 text-lg leading-relaxed">
-                    I always felt like I could do anything. That’s the main
-                    thing people are controlled by! Thoughts- their perception
-                    of themselves! They're slowed down by their perception of
-                    themselves. If you're taught you can’t do anything, you
-                    won’t do anything. I was taught I could do everything.
-                  </p>
+                  <Form
+                        style={{ width: "100%" }}
+                        autoComplete="off"
+                        labelCol={{ span: 10 }}
+                        wrapperCol={{ span: 14 }}
+                        onFinish={async (values) => {
+                          let finalPayload = {
+                            name: currentData?.name ,
+                            email: currentData?.email ,
+                            dia_chi: currentData?.dia_chi ,
+                            gender: currentData?.gender ,
+                            phone: currentData?.phone ,
+                            password: values?.password ,
+                            id: currentData?.id ,
+                          }
+                          console.log(finalPayload)
+                          const respone = await apiUpdateUser(finalPayload)
+                          console.log({ respone });
+                        }}
+                        // onFinishFailed={(error) => {
+                        //   console.log({ error });
+                        // }}
+                      >
+                              <Form.Item
+                                  name="passwordold"
+                                  label="Mật khẩu cũ"
+                                  rules={[
+                                    {
+                                      required: true,
+                                    },
+                                    //{ value: currentData?.password },
+                                    {
+                                      validator: (_, value) =>
+                                      value &&  checkpassword(value)  
+                                          ? Promise.resolve()
+                                          : Promise.reject("Password does not true."),
+                                    },
+                                  ]}
+                                  hasFeedback
+                                >
+                                  {/* {setTimeout(() => {
+                                    
+                                  }, 5000)} */}
+                                  <Input.Password placeholder="Type your password" />
+                                
+                            </Form.Item>
+
+                            <Form.Item
+                                  name="password"
+                                  label="Mật khẩu mới"
+                                  rules={[
+                                    {
+                                      required: true,
+                                    },
+                                    { min: 6 },
+                                   
+                                  ]}
+                                  hasFeedback
+                                  
+                                >
+                                <Input.Password placeholder="Type your password" 
+                                  />
+                            </Form.Item>
+
+                            <Form.Item
+                              name="confirmPassword"
+                              label="Xác nhận mật khẩu"
+                              dependencies={["password"]}
+                              rules={[
+                                {
+                                  required: true,
+                                },
+                                ({ getFieldValue }) => ({
+                                  validator(_, value) {
+                                    if (!value || getFieldValue("password") === value) {
+                                      return Promise.resolve();
+                                    }
+                                    return Promise.reject(
+                                      "The two passwords that you entered does not match."
+                                    );
+                                  },
+                                }),
+                              ]}
+                              hasFeedback
+                            >
+                              <Input.Password placeholder="Confirm your password" />
+                            </Form.Item>
+                              
+                              <Form.Item wrapperCol={{ span: 24 }} className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+                                    <Button  className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                    onClick={()=>setShowModal(false)}>
+                                        Đóng
+                                    </Button>
+                                    <Button  type="primary" htmlType="submit" 
+                                      className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                      onClick={()=> setShowModal(false)}
+                                    >
+                                        Xác nhận
+                                    </Button>
+                             </Form.Item>
+
+                  </Form>
+                      
                 </div>
-                {/*footer*/}
-                <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
-                  <button
-                    className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                    type="button"
-                    onClick={() => setShowModal(false)}
-                  >
-                    Close
-                  </button>
-                  <button
-                    className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                    type="button"
-                    onClick={() => setShowModal(false)}
-                  >
-                    Save Changes
-                  </button>
-                </div>
+                
               </div>
             </div>
           </div>
           <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
         </>
-      ) : null}
-    </>
-  );
+      )
+    : null}
+    </div>
+  )
 }

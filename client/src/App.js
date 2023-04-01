@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { SliderComponent } from "./components";
-import {Home, Homepage, Login, DetailPost, Header,Footer, Menu} from './containers/Public'
+import {Home, Homepage, Login, DetailPost, Header,Footer, Menu, BookingTable} from './containers/Public'
 import {path} from './ultils/constant'
 import { System , CreatePost ,Admin, Customers} from './containers/System'
 
@@ -15,7 +15,7 @@ function App() {
     
     <div className="bg-primary w-full relative">
       <Header />
-      {/* <SliderComponent  arrImages={arrImages} className='z-10'/> */}
+      <SliderComponent  arrImages={arrImages} />
       <Routes>
          <Route path={path.HOME} element={<Home/>}>
           < Route path={path.LOGIN} element={<Login/>} />  
@@ -24,9 +24,10 @@ function App() {
           <Route path={path.HOME_PAGE} element={<Homepage/>}/> 
           <Route path={path.DETAIL_POST} element={<DetailPost/>}/>
           < Route path={path.MENU} element={<Menu/>} />
+          < Route path={path.BOOKING} element={<BookingTable/>} />
           {/* < Route path={path.DETAIL} element={<DetailPost/>} /> */}
-        <Route path={path.SYSTEM} element={<System/>}>
-          <Route path={path.CREATE_POST} element={<CreatePost/>}/>
+        <Route path={path.ACCOUNT} element={<System/>}>
+          {/* <Route path={path.CREATE_POST} element={<CreatePost/>}/> */}
            
         </Route>
         <Route path={path.ADMIN} element={<Admin/>}>

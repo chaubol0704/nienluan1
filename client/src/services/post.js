@@ -81,3 +81,19 @@ export const apiUploadImages = (images) => new Promise(async (resolve, reject) =
         reject(error)
     }
 })
+
+export const apiDeletePost = (id) =>new Promise(async(resolve, reject)=> {
+    try {
+        console.log(id)
+        const respone = await axiosConfig({
+            method: 'delete',
+            // url: `/api/v1/menu/limit?page=${page}`,
+            url: `/api/v1/post/delete-post`,
+            data: id
+            
+        })
+        resolve(respone)
+    } catch (error) {
+        reject(error)
+    }
+})

@@ -27,12 +27,16 @@ module.exports = {
         type: Sequelize.BOOLEAN
       },
       createdAt: {
+        type: 'TIMESTAMP',
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
         allowNull: false,
-        type: Sequelize.DATE
+        default: Date.now()
       },
       updatedAt: {
+        type: 'TIMESTAMP',
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
         allowNull: false,
-        type: Sequelize.DATE
+        default: Date.now()
       }
     });
   },

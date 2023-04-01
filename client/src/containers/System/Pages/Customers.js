@@ -47,6 +47,8 @@ const Customers = () => {
         });
     };
     const onEditUser = (record) => {
+      console.log(record.id)
+      dispatch(actions.editUser(record))
       setIsEditing(true)     
       
       setEditingUser({ ...record });
@@ -103,8 +105,12 @@ const Customers = () => {
                         <>
                           <EditOutlined
                             onClick={() => {
-                              console.log(dataSource)
-                              dispatch(actions.editPost(dataSource[0]))
+                              onEditUser(record)
+                              // console.log(dataSource)
+                              // dataSource.map(item => {
+
+                              // })
+                              // dispatch(actions.editUser(dataSource[]))
                               setIsEditing(true);
                             }}
                           />

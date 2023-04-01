@@ -1,33 +1,47 @@
-// ten_nv: DataTypes.STRING,
-//     dia_chi: DataTypes.STRING,
-//     phone: DataTypes.INTEGER,
-//     password: DataTypes.STRING,
-//     phan_quyen: DataTypes.INTEGER,
+ 
 'use strict';
+
+const { STRING } = require('sequelize');
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Hoa_dons', {
-      id_hoa_don: {
+    //    id_book: DataTypes.INTEGER,
+    // id_bookMenu: DataTypes.INTEGER,
+    // id_kh: DataTypes.INTEGER,
+    // time_book: DataTypes.DATE,
+    // tien_coc: DataTypes.FLOAT
+    await queryInterface.createTable('DetailBookings', {
+      id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      id_nv: {
+      id_book: {
+        type: Sequelize.INTEGER
+      },
+      id_bookMenu: {
         type: Sequelize.INTEGER
       },
       id_kh: {
         type: Sequelize.INTEGER
       },
-      id_ban_pv: {
-        type: Sequelize.INTEGER
+      time_book: {
+        type: 'TIMESTAMP',
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
-      thoi_gian_lap: {
-        type: Sequelize.DATE
-      },
-      tong_thanh_toan: {
+      tien_coc: {
         type: Sequelize.FLOAT
+      },
+      name: {
+        type: Sequelize.STRING
+      },
+      email: {
+        type: Sequelize.STRING
+      },
+      phone: {
+        type: Sequelize.STRING
       },
       createdAt: {
         type: 'TIMESTAMP',
@@ -42,6 +56,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Hoa_dons');
+    await queryInterface.dropTable('DetailBookings');
   }
 };

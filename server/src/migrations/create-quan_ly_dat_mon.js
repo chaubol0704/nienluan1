@@ -7,21 +7,18 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Ca_lams', {
+    await queryInterface.createTable('Quan_ly_dat_mons', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      ten_ca: {
-        type: Sequelize.STRING
+      id_mon: {
+        type: Sequelize.INTEGER
       },
-      gio_bat_dau: {
-        type: Sequelize.DATE
-      },
-      gio_ket_thuc: {
-        type: Sequelize.DATE
+      don_gia: {
+        type: Sequelize.FLOAT
       },
       createdAt: {
         type: 'TIMESTAMP',
@@ -32,11 +29,10 @@ module.exports = {
         type: 'TIMESTAMP',
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
         allowNull: false
-        // default: Date.now()
       }
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Ca_lams');
+    await queryInterface.dropTable('Quan_ly_dat_mons');
   }
 };

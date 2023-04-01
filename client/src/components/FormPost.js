@@ -67,15 +67,15 @@ const FormPost = ({isEditing,setIsEditing, isCreate,setIsCreate}) => {
         setPayload(prev => ({ ...prev, images: [...prev.images, ...images] }))
     }
   return (
-    <div>
-        <form className='py-30'>           
-             <div>
-                <label htmlFor="title">Tiêu đề</label>
+    <div className='p-20 '>
+        <form className='gap-5'>           
+             <div className='flex justify-center gap-5 items-center'>
+                <label htmlFor="title" className='w-1/5'>Tiêu đề</label>
                 <div className='flex items-center'>
                     <input
                         type="text"
                         id=" title"
-                        className='rounded-md outline-none border flex-auto border-gray-300 p-2'
+                        className='rounded-md outline-none border flex-auto border-gray-300 p-2  w-[600px]'
                         value={payload.title}
                         onChange={(e) => setPayload(prev => ({ ...prev, title: e.target.value }))}
                     />

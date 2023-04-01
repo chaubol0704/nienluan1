@@ -8,34 +8,27 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Quan_ly_dat_bans', {
-      id_ban_pv: {
+      id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      id_kh: {
+      id_ban: {
         type: Sequelize.INTEGER
       },
-      id_phieu_goi: {
-        type: Sequelize.INTEGER
-      },
-      thoi_gian_dat: {
-        type: Sequelize.DATE
-      },
-      tien_coc: {
-        type: Sequelize.FLOAT
-      },
-      phan_quyen: {
+      so_nguoi: {
         type: Sequelize.INTEGER
       },
       createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
+        type: 'TIMESTAMP',
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+        allowNull: false
       },
       updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
+        type: 'TIMESTAMP',
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+        allowNull: false
       }
     });
   },

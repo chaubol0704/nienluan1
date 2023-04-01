@@ -11,10 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Ban.hasMany(models.Quan_ly_dat_ban, {foreignKey: 'id_ban', as: 'ban'})
     }
   }
   Ban.init({
-    
     trang_thai: DataTypes.STRING,
     so_ghe: DataTypes.INTEGER,
   }, {

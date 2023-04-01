@@ -15,10 +15,10 @@ const FormMenu = ({isEditing,setIsEditing, isCreate,setIsCreate}) => {
     const [payload, setPayload] =useState(() => {
       const initData = {
          id: dataEdit?.id || 1,
-         ten_loai: dataEdit?.loai?.ten_loai || 1,
+         ten_loai: dataEdit?.loai?.ten_loai ,
          ten_mon: dataEdit?.ten_mon || '',
          anh_mon: dataEdit?.anh_mon || '',
-         gia: dataEdit?.gia || 0,
+         gia: dataEdit?.gia ,
          mo_ta: dataEdit?.mo_ta || '',
       }
      
@@ -30,9 +30,9 @@ const FormMenu = ({isEditing,setIsEditing, isCreate,setIsCreate}) => {
   const handleSubmit = async() =>{
         let finalPayload = {
             id: payload?.id ,
-            ten_loai: payload?.loai?.ten_loai ,
+            ten_loai: payload?.ten_loai ,
             ten_mon: payload?.ten_mon ,
-            anh_mon: payload?.anh_mon ,
+            anh_mon: payload?.anh_mon[0] ,
             gia: payload?.gia ,
             mo_ta: payload?.mo_ta ,
         }
@@ -54,7 +54,7 @@ const FormMenu = ({isEditing,setIsEditing, isCreate,setIsCreate}) => {
         }))
     }
   const handleFiles = async (e) => {
-        console.log(e)
+        // console.log(e)
         e.stopPropagation()
         setIsLoading(true)
         let images = []
@@ -69,13 +69,14 @@ const FormMenu = ({isEditing,setIsEditing, isCreate,setIsCreate}) => {
         }
         setIsLoading(false)
         setImagesPreview(prev => [...prev, ...images])
-        setPayload(prev => ({ ...prev, images: [...prev.images, ...images] }))
+        setPayload(prev => ({ ...prev, anh_mon: [...prev.anh_mon, ...images] }))
     }
   return (
-    <div>
-        <form className='py-30'>           
-             <div>
-                <label htmlFor="title">Tên Loại Món</label>
+    <div className='p-20 '>
+
+        <form className='gap-5'>           
+             <div className='flex justify-center gap-10 items-center'>
+                <label htmlFor="title" className='w-1/5'>Tên Loại Món</label>
                 <div className='flex items-center'>
                     <input
                         type="text"
@@ -87,8 +88,8 @@ const FormMenu = ({isEditing,setIsEditing, isCreate,setIsCreate}) => {
                     
                 </div>
             </div>  
-            <div>
-                <label htmlFor="title">Tên  Món</label>
+            <div className='flex justify-center gap-10 items-center'>
+                <label htmlFor="title" className='w-1/5'>Tên  Món</label>
                 <div className='flex items-center'>
                     <input
                         type="text"
@@ -100,8 +101,8 @@ const FormMenu = ({isEditing,setIsEditing, isCreate,setIsCreate}) => {
                     
                 </div>
             </div> 
-            <div>
-                <label htmlFor="title">Giá</label>
+            <div className='flex justify-center gap-10 items-center'>
+                <label htmlFor="title" className='w-1/5'>Giá</label>
                 <div className='flex items-center'>
                     <input
                         type="text"
@@ -113,8 +114,8 @@ const FormMenu = ({isEditing,setIsEditing, isCreate,setIsCreate}) => {
                     
                 </div>
             </div> 
-            <div>
-                <label htmlFor="title">Mô tả</label>
+            <div className='flex justify-center gap-10 items-center'>
+                <label htmlFor="title" className='w-1/5'>Mô tả</label>
                 <div className='flex items-center'>
                     <input
                         type="text"
@@ -142,10 +143,10 @@ const FormMenu = ({isEditing,setIsEditing, isCreate,setIsCreate}) => {
                             <input onChange={handleFiles}  type="file" id='file' multiple />
                             <div className='w-full'>
                                 <h3 className='font-medium py-4'>Ảnh đã chọn</h3>
-                                <div className='flex gap-4 items-center'>
+                                <div className='flex gap-4  items-center'>
                                     {imagesPreview?.map(item => {
                                         return (
-                                            <div key={item} className='relative w-1/3 h-1/3 '>
+                                            <div key={item} className='relative '>
                                                 <img src={item} alt="preview" className='w-full h-full object-cover rounded-md' />
                                                 <span
                                                     title='Xóa'
@@ -162,7 +163,7 @@ const FormMenu = ({isEditing,setIsEditing, isCreate,setIsCreate}) => {
                         </div>
                     </div>      
 
-            <div className='flex justify-between'>
+            <div className='flex justify-center gap-10 items-center'>
                 <Button text='Hủy'
                     onClick={()=> 
                        isCreate ? setIsCreate(false): setIsEditing(false)}

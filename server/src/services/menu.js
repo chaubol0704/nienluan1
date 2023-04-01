@@ -1,6 +1,7 @@
 import db from '../models'
 import { Op} from 'sequelize'
 import { v4 } from 'uuid'
+const UUID = require('uuid-int')
 
 export const getMenuService = () => new Promise(async(resolve, reject) => {
     try {
@@ -56,7 +57,7 @@ export const getMenuLimitService = (page,query) => new Promise(async(resolve, re
             raw: true,
             nest: true,
             offset: offset * 9 || 0,
-            // order: [['createdAt' , 'DESC']],
+            order: [['createdAt' , 'DESC']],
             limit: 9 ,
             // ...queries,
             include: [
@@ -147,8 +148,25 @@ export const createMenuService = (data) => new Promise(async (resolve, reject) =
                     msg: 'Mon an da co trong menu'
                 })
         }
+        const loai = await db.Loai_mon.findAll({where:  { ten_loai: data?.ten_loai },raw: true});
+        console.log(loai)
+        let id_l = loai[0]?.id 
+        console.log(id_l)
+        if(!id_l ) {
+            const id_loai = UUID(0).uuid()
+            const re = await db.Loai_mon.findOrCreate({
+                where: { ten_loai: data?.ten_loai },
+                defaults: {
+                    id: id_loai,
+                    image: data?.images
+                    
+                }
+            })
+            id_l = id_loai
+        } 
+
         const response = await db.Mon_an.build({        
-                id_loai: data.id_loai,
+                id_loai: id_l,
                 ten_mon: data.ten_mon,
                 gia: data.gia,
                 anh_mon: data.anh_mon,

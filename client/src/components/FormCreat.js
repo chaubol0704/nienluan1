@@ -20,6 +20,7 @@ function FormCreat({ isCreate,setIsCreate}) {
       return initData
   })
   console.log(payload)
+  console.log(dataEdit)
   return (
     <div className="App items-center flex flex-col w-full">
       {/* <header className="App-header"> */}
@@ -33,7 +34,7 @@ function FormCreat({ isCreate,setIsCreate}) {
             let finalPayload = {
               id: values?.id ,
               name: values?.name ,
-              dia_chi: values?.dia_chi?.image ,
+              dia_chi: values?.dia_chi ,
               password: values?.password ,
               phone: values?.phone ,
               email: values?.email ,
@@ -58,12 +59,13 @@ function FormCreat({ isCreate,setIsCreate}) {
                 required: true,
                 message: "Please enter your name",
               },
+             
               { whitespace: true },
               { min: 3 },
             ]}
             hasFeedback
           >
-            <Input placeholder="Type your name" />
+            <Input placeholder="Type your name" value={payload?.name} />
           </Form.Item>
 
           <Form.Item
@@ -123,6 +125,7 @@ function FormCreat({ isCreate,setIsCreate}) {
               {
                 required: true,
               },
+              
               { min: 6 },
               // {
               //   validator: (_, value) =>

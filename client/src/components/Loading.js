@@ -9,7 +9,7 @@ const Loading = () => {
             width="80"
             ariaLabel="blocks-loading"
             wrapperStyle={{}}
-            wrapperClass="blocks-wrapper"
+            wrapperclassName="blocks-wrapper"
             colors={['#ccc', '#ccc', '#ccc', '#ccc', '#ccc']}
         />
     )

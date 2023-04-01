@@ -16,11 +16,17 @@ const initState = {
 const authReducer = (state = initState, action) => {
     switch(action.type){
         case actionTypes.REGISTER_SUCCESS:
+            return{
+                ...state,
+                isLoggedIn: false,
+                token: action.data,
+                msg:''
+            }
         case actionTypes.LOGIN_SUCCESS:
             
             return{
                 ...state,
-                isLoggedIn: false,
+                isLoggedIn: true,
                 token: action.data,
                 msg:''
             }

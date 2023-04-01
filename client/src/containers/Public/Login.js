@@ -8,8 +8,10 @@ const Login = () => {
     const location = useLocation()
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const { isLoggedIn, msg, update } = useSelector(state => state.auth)
+    
+    const { isLoggedIn } = useSelector(state => state.auth)
     const [isRegister, setIsRegister] = useState(location.state?.flag)
+    
     const [invalidFields, setInvalidFields] = useState([]);
     const [payload, setPayload]= useState({
         phone: '',
@@ -70,9 +72,9 @@ const Login = () => {
         return invalids
     }
     return (
-        <div className='w-full flex items-center justify-center relative'>
-            <div className='bg-white w-[600px] p-[30px] pb-[100px] rounded-md shadow-sm mt-8 '>
-                <h3 className='font-semibold text-2xl mb-3'>{isRegister? 'Dang ky tai khoan': 'Đăng nhập'}</h3>
+        <div className='w-full flex items-center justify-center relative '>
+            <div className='absolute top-0 z-50 bg-white w-[600px] p-[30px] pb-[100px] rounded-md shadow-sm mt-8 '>
+                <h3 className='font-semibold text-2xl mb-3'>{isRegister? 'Đăng ký tài khoản': 'Đăng nhập'}</h3>
 
                 <div className='w-full flex flex-col gap-3 mb-7 '>
                     {isRegister && <InputForm setInvalidFields={setInvalidFields} invalidFields={invalidFields} label={'Ho ten'} value={payload.name} setvalue={setPayload} keyPayload={'name'}/>}
@@ -100,10 +102,10 @@ const Login = () => {
                                     name: ''
                                 })
                                 
-                                }}>Dang nhap ngay</span></small>
+                                }}>Đăng nhập ngay</span></small>
                             :
                         <>
-                             <small className='text-[blue] hover:text-[red] cursor-pointer'> Ban quen mat khau</small>
+                             <small className='text-[blue] hover:text-[red] cursor-pointer'>Bạn đã quên mật khẩu</small>
                             <small 
                                 onClick={()=>
                                      {setIsRegister(true)
@@ -114,14 +116,14 @@ const Login = () => {
                                         })
                                             
                                     }} 
-                               className='text-[blue] hover:text-[red] cursor-pointer'> Tao tai khoan moi</small>
+                               className='text-[blue] hover:text-[red] cursor-pointer'> Tao tài khoản mới</small>
                         </>                
                     }
                    
                  </div>
             </div>
             
-           
+           {/* <div className="opacity-25 fixed inset-0 z-40 bg-black"></div> */}
         </div>
     );
 }

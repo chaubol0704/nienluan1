@@ -47,7 +47,7 @@ export const updateMenu = async (req, res) => {
 }
 
 export const deleteMenu = async (req, res) => {
-    
+    console.log(req.body.id)
     try {
         if (!req.body.id){
             return res.status(400).json({

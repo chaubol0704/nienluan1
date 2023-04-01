@@ -19,7 +19,7 @@ function SideMenu() {
 
   const navigate = useNavigate();
   return (
-    <div className="SideMenu py-5 ">
+    <div className="py-5 flex flex-col ">
       <Menu
         className="SideMenuVertical"
         mode="vertical"
