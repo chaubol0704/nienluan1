@@ -1,7 +1,11 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux'
 
 const Navigation = () => {
+  const {currentData} = useSelector(state => state.user)
+  const { isLoggedIn } = useSelector(state => state.auth)
+  console.log(currentData)
     return (
         // <div className='w-screen justify-center flex h-[40px] bg-secondary1 text-white'>
             
@@ -19,13 +23,13 @@ const Navigation = () => {
                   <span  className="block py-2 pl-3 pr-4 text-white  rounded md:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white" aria-current="page">Trang chủ</span>
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link to={''}>
                 <span  className="block py-2 pl-3 pr-4  rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
                 Giới thiệu</span>
               </Link>
               
-            </li>
+            </li> */}
             <li>
               <Link to={'/home-page'}>
                 <span  className="block py-2 pl-3 pr-4  rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
@@ -51,14 +55,15 @@ const Navigation = () => {
               </Link>
 
               </li>
-
+            {isLoggedIn && currentData.phan_quyen == 'admin' &&
               <li>
-                <Link to={'/admin'}>
+                <Link to={'/admin/manage-statistics'}>
                   <span  className="block py-2 pl-3 pr-4  rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
                     Admin </span>
               </Link>
               
               </li>
+            }
           </ul>
         </div>
 

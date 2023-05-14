@@ -13,10 +13,10 @@ const FormPost = ({isEditing,setIsEditing, isCreate,setIsCreate}) => {
     const [invalidFields, setInvalidFields] = useState([]);
     const [payload, setPayload] =useState(() => {
       const initData = {
-         id: dataEdit?.id || 1,
-         title: dataEdit?.title || '',
-         images: dataEdit?.images?.image || '',
-         content: dataEdit?.content || '',
+         id: isEditing?dataEdit?.id : 1,
+         title: isEditing?dataEdit?.title : '',
+         images: isEditing?dataEdit?.images?.image : '',
+         content: isEditing? dataEdit?.content : '',
       }
      
       return initData
@@ -27,7 +27,7 @@ const FormPost = ({isEditing,setIsEditing, isCreate,setIsCreate}) => {
   const handleSubmit = async() =>{
         let finalPayload = {
             title: payload.title,
-            images: payload?.images?.image,
+            images: isEditing? payload?.images[payload?.images.length-1]: payload?.images[0] ,
             content: payload?.content,
             id: payload?.id
         }
@@ -67,7 +67,7 @@ const FormPost = ({isEditing,setIsEditing, isCreate,setIsCreate}) => {
         setPayload(prev => ({ ...prev, images: [...prev.images, ...images] }))
     }
   return (
-    <div className='p-20 '>
+    <div className='p-20 z-50'>
         <form className='gap-5'>           
              <div className='flex justify-center gap-5 items-center'>
                 <label htmlFor="title" className='w-1/5'>Tiêu đề</label>

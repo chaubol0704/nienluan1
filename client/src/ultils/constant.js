@@ -24,6 +24,9 @@ export const path = {
     CUSTOMERS  : 'customers',
     MANAGE_POST: 'manage-post',
     MANAGE_MENU: 'manage-menu',
+    MANAGE_BOOKING: 'manage-booking',
+    MANAGE_TABLE: 'manage-table',
+    MANAGE_STATISTICS: 'manage-statistics',
 
     BOOKING: 'booking',
     

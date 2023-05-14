@@ -1,6 +1,8 @@
+import { UUIDV4 } from 'sequelize'
 import db from '../models'
-import { v4 } from 'uuid'
+import { v4, v5 } from 'uuid'
 const UUID = require('uuid-int')
+const uuid = require('uuid');
 
 export const getPostsService = () => new Promise(async(resolve, reject) => {
     try {
@@ -101,12 +103,30 @@ export const updatePostService = (data) => new Promise(async (resolve, reject) =
                     msg: 'The user is not defined'
                 })
             }
+            function generateId() {
+            const min = 100000;
+            const max = 999999;
+            const num = Math.floor(Math.random() * (max - min + 1)) + min;
+            return num;
+            }
+
+            const id = generateId();
+            console.log(id);
+            const re = await db.Image.findOrCreate({
+                where: { image: data?.images },
+                defaults: {
+                    id: id,
+                    // id,
+                    image: data?.images
+                    
+                }
+            })
            
                 post.title = data.title,             
                 post.content = data.content,
-                post.imagesId = data.imagesId,
+                post.imagesId = id,
                 post.userId = data.userId,
-                post.voucherId = data.voucherId,
+                // post.voucherId = data.voucherId,
     
             await post.save()
             resolve({
@@ -141,39 +161,58 @@ export const deletePostService = (postId) => new Promise(async (resolve, reject)
         }
 })
 export const createPostService = (data) => new Promise(async (resolve, reject) => {
-    console.log(data)
+    // console.log(data)
     try {
        
-        // const post = await db.Post.findOne({
-        //         where: {id: data.id},
-        //         raw: false
-        //     })
-        // if(post){
-        //     resolve({
-        //             err: 1,
-        //             msg: 'Mon an da co trong post'
-        //         })
-        // }
-        const imagesId = UUID(0).uuid()
+       
+        // const imagesId = uuid.v4();
+        // console.log(imagesId)
+        // const imagesIdnum =  parseInt(imagesId.replace(/-/g, ""), 16)
+        // // imagesId = imagesId%1000000
+        // console.log(data)
+        // const id_loai = UUID(0).uuid()
+        function generateId() {
+            const min = 100000;
+            const max = 999999;
+            const num = Math.floor(Math.random() * (max - min + 1)) + min;
+            return num;
+            }
+
+            const id = generateId();
+            console.log(id);
         const re = await db.Image.findOrCreate({
             where: { image: data?.images },
             defaults: {
-                id: imagesId,
+                id: id,
+                // id,
                 image: data?.images
                 
             }
         })
+        // const re = await db.Loai_mon.findOrCreate({
+        //         where: { ten_loai: data?.ten_loai },
+        //         defaults: {
+        //             id: id_loai,
+        //             // image: data?.images
+        //             ten_loai: data?.ten_loai
+                    
+        //         }
+        //     })
+        // await re.save()  
         // const imagesId = await db.Image.findOne({
         //     where: { image: data?.images },
         //     attributes: ['id']
         // })
-        console.log(imagesId)
+        // console.log(id_loai)
+        console.log(re)
+
         const response = await db.Post.build({        
                 title: data?.title,
                 content: data?.content,
-                voucherId: data?.voucherId,
-                imagesId: imagesId,
-                userId: data?.userId,
+                // voucherId: data?.voucherId,
+                // imagesId: re[0].dataValues.id,
+                imagesId: id,
+                // userId: data?.userId,
             
         })
         

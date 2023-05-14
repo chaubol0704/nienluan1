@@ -28,7 +28,7 @@ export const getMenu = () => async (dispatch) =>{
 export const getMenuLimit = (query) => async (dispatch) =>{
     try {
         const respone = await apiGetMenuLimit(query)
-        // console.log(respone.data)
+        console.log(respone)
         if (respone?.data.msg  === "OK"){
             dispatch({
                 // truyền mảng lưu trong redux
@@ -55,4 +55,9 @@ export const getMenuLimit = (query) => async (dispatch) =>{
 export const editMenu = (dataEdit)  =>({
     type: actionTypes.EDIT_MENU,
     dataEdit
+})
+
+export const saveData = (data)  =>({
+    type: actionTypes.SAVEDATA,
+    data
 })

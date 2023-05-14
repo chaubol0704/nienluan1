@@ -33,7 +33,7 @@ const Search = (props) => {
     <div className="input-group mb-3 border border-black-200">
       <input
         type="text"
-        className="form-control p-3 w-4/5"
+        className="form-control p-3 w-2/3"
         placeholder="Vui lòng nhập tên"
         aria-label="Recipient's username"
         onChange={changeSearch}
@@ -41,7 +41,7 @@ const Search = (props) => {
         value={search}
       />
       <button
-        className="text-white bg-blue-500 p-3 w-1/5"
+        className="text-white bg-blue-500 p-3 w-1/3 "
         type="button"
         onClick={searchHandle}
       >

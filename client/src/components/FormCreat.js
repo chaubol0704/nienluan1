@@ -4,16 +4,17 @@ import { useSelector } from 'react-redux';
 import { apiRegister } from '../services';
 
 function FormCreat({ isCreate,setIsCreate}) {
-  const {dataEdit} = useSelector(state => state.auth)
+    const {dataEdit} = useSelector(state => state.auth)
     const [invalidFields, setInvalidFields] = useState([]);
     const [payload, setPayload] =useState(() => {
       const initData = {
          id: dataEdit?.id || 1,
          name: dataEdit?.name || '',
-         dia_chi: dataEdit?.dia_chi?.image || '',
+         dia_chi: dataEdit?.dia_chi|| '',
          password: dataEdit?.password || '',
          phone: dataEdit?.phone || '',
          email: dataEdit?.email || '',
+         avatar: dataEdit?.avatar || '',
          gender: dataEdit?.gender || true,
       }
      
@@ -22,7 +23,7 @@ function FormCreat({ isCreate,setIsCreate}) {
   console.log(payload)
   console.log(dataEdit)
   return (
-    <div className="App items-center flex flex-col w-full">
+    <div className="App items-center flex flex-col w-full z-50 ">
       {/* <header className="App-header"> */}
       <h3 className='items-center p-20 text-3xl'>Create New User</h3>
         <Form

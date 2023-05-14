@@ -14,7 +14,13 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      id_bookM: {
+        type: Sequelize.INTEGER
+      },
       id_mon: {
+        type: Sequelize.INTEGER
+      },
+      so_luong: {
         type: Sequelize.INTEGER
       },
       don_gia: {

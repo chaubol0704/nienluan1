@@ -14,12 +14,12 @@ const FormMenu = ({isEditing,setIsEditing, isCreate,setIsCreate}) => {
     const [invalidFields, setInvalidFields] = useState([]);
     const [payload, setPayload] =useState(() => {
       const initData = {
-         id: dataEdit?.id || 1,
-         ten_loai: dataEdit?.loai?.ten_loai ,
-         ten_mon: dataEdit?.ten_mon || '',
-         anh_mon: dataEdit?.anh_mon || '',
-         gia: dataEdit?.gia ,
-         mo_ta: dataEdit?.mo_ta || '',
+         id: isEditing? dataEdit?.id : 1,
+         ten_loai:isEditing? dataEdit?.loai?.ten_loai: 1 ,
+         ten_mon:isEditing? dataEdit?.ten_mon : '',
+         anh_mon:isEditing? dataEdit?.anh_mon : '',
+         gia:isEditing? dataEdit?.gia : 0,
+         mo_ta:isEditing? dataEdit?.mo_ta : '',
       }
      
       return initData
@@ -32,13 +32,13 @@ const FormMenu = ({isEditing,setIsEditing, isCreate,setIsCreate}) => {
             id: payload?.id ,
             ten_loai: payload?.ten_loai ,
             ten_mon: payload?.ten_mon ,
-            anh_mon: payload?.anh_mon[0] ,
+            anh_mon: isEditing? payload?.anh_mon[payload?.anh_mon.length-1]: payload?.anh_mon[0] ,
             gia: payload?.gia ,
             mo_ta: payload?.mo_ta ,
         }
         
         console.log(isEditing)
-        console.log(isEditing)
+        console.log(payload.anh_mon)
         // let invalids = validate(finalPayload)
          isEditing? await apiUpdateMenu(finalPayload) :await apiCreateMenu(finalPayload)
         isEditing ? setIsEditing(false): setIsCreate(false)
@@ -47,6 +47,7 @@ const FormMenu = ({isEditing,setIsEditing, isCreate,setIsCreate}) => {
   const [imagesPreview, setImagesPreview] = useState([payload.anh_mon])
   const [isLoading, setIsLoading] = useState(false)
   const handleDeleteImage = (image) => {
+        // console.log(image)
         setImagesPreview(prev => prev?.filter(item => item !== image))
         setPayload(prev => ({
             ...prev,
@@ -54,7 +55,7 @@ const FormMenu = ({isEditing,setIsEditing, isCreate,setIsCreate}) => {
         }))
     }
   const handleFiles = async (e) => {
-        // console.log(e)
+        console.log(e)
         e.stopPropagation()
         setIsLoading(true)
         let images = []
@@ -72,7 +73,7 @@ const FormMenu = ({isEditing,setIsEditing, isCreate,setIsCreate}) => {
         setPayload(prev => ({ ...prev, anh_mon: [...prev.anh_mon, ...images] }))
     }
   return (
-    <div className='p-20 '>
+    <div className='p-20 z-50'>
 
         <form className='gap-5'>           
              <div className='flex justify-center gap-10 items-center'>

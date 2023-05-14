@@ -24,7 +24,7 @@ const Customers = () => {
         dispatch(action.getUser())
         setDataSource(user)
         setLoading(false)
-    },[update])
+    },[update,isEditing, isCreate,loading])
     // console.log(user)
     const onDeleteUser = (record) => {
         console.log(record.id)
@@ -58,21 +58,21 @@ const Customers = () => {
       setEditingUser(null);
     };
   return (
-    <Space size={20} direction="vertical" className="w-[1024px] p-10">
-        <Typography.Title level={4}>Customers</Typography.Title>
+    <Space size={20} direction="vertical" className="w-[1024px] p-10 relative">
+        <Typography.Title level={4}>Quản lý tài khoản khách hàng</Typography.Title>
         <Button onClick={() => setIsCreate(true)}>Add a new User</Button>
         <Table
         loading={loading}
         // style={{ width: , marginLeft: 12 }}
         columns = {
           [
-                // {
-                //   title: "Photo",
-                //   dataIndex: "image",
-                //   render: (link) => {
-                //     return <Avatar src={link} />;
-                //   },
-                // },
+                {
+                  title: "Photo",
+                  dataIndex: "avatar",
+                  render: (link) => {
+                    return <Avatar src={link} />;
+                  },
+                },
                 {
                   title: "id",
                   dataIndex: "id",

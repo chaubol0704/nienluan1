@@ -3,9 +3,10 @@ import { Op} from 'sequelize'
 import { v4 } from 'uuid'
 const UUID = require('uuid-int')
 
-export const getMenuService = () => new Promise(async(resolve, reject) => {
+export const getMenuService = (id) => new Promise(async(resolve, reject) => {
     try {
-        const respone = await db.Mon_an.findAll({
+        const respone = await db.Mon_an.findOne({
+            where: {id: id},
             raw: true,
             nest: true,
             include: [
@@ -29,21 +30,28 @@ export const getMenuLimitService = (page,query) => new Promise(async(resolve, re
     // console.log(query)
     try {
         let offset = (!page|| +page <= 1)? 0:(page - 1)
-        
-        // if(query.ten_mon == '' || !query.ten_mon) {
-        //     query.ten_mon = null
-        // }
-        if(query.id_loai==0 || !query.id_loai) query.id_loai = null
-        // // console.log(query)
-        // if(query.id_loai==null && query.ten_mon==null)  query = null
+        if (query?.page){
+             delete query[query.page]
+        } 
+        // if(!query?.ten_mon && !query?.id_loai) query = null
+        // if (!query.id_loai || query?.id_loai==0){
+        //      delete query[query.id_loai]
+        // } 
+        // if (!query?.ten_mon){
+        //      delete query[query?.ten_mon]
+        // } 
+        // if (query?.ten_mon){
+        //     query.ten_mon = {[Op.like]: `%${query?.ten_mon}%`}
+        // } 
+        // console.log(query)
         const respone = await db.Mon_an.findAndCountAll({
             
             where: 
-             {
+            {
                 [Op.or] : [
-                    {
-                        id_loai: query.id_loai
-                   },
+                //     {
+                //         id_loai: query.id_loai
+                //    },
                    {
                      ten_mon: {
                         [Op.like]: `%${query.ten_mon}%`
@@ -53,6 +61,7 @@ export const getMenuLimitService = (page,query) => new Promise(async(resolve, re
                 ]
                               
             }
+            // query
             ,
             raw: true,
             nest: true,
@@ -137,7 +146,9 @@ export const deleteMenuService = (menuId) => new Promise(async (resolve, reject)
         }
 })
 export const createMenuService = (data) => new Promise(async (resolve, reject) => {
+
     try {
+        console.log(data)
         const menu = await db.Mon_an.findOne({
                 where: {ten_mon: data.ten_mon},
                 raw: false
@@ -150,20 +161,26 @@ export const createMenuService = (data) => new Promise(async (resolve, reject) =
         }
         const loai = await db.Loai_mon.findAll({where:  { ten_loai: data?.ten_loai },raw: true});
         console.log(loai)
-        let id_l = loai[0]?.id 
+        let id_l = loai[0]?.id || 0
         console.log(id_l)
-        if(!id_l ) {
+        if(id_l === 0) {
             const id_loai = UUID(0).uuid()
-            const re = await db.Loai_mon.findOrCreate({
-                where: { ten_loai: data?.ten_loai },
-                defaults: {
-                    id: id_loai,
-                    image: data?.images
+            console.log(id_loai)
+            const re = await db.Loai_mon.build({
+                // where: { ten_loai: data?.ten_loai },
+                // defaults: {
+                //     // id: id_loai,
+                //     // image: data?.images
+                //     ten_loai: data?.ten_loai
                     
-                }
+                // }
+                ten_loai: data?.ten_loai
             })
+            await re.save()
+            console.log(re)
             id_l = id_loai
         } 
+        console.log(id_l)
 
         const response = await db.Mon_an.build({        
                 id_loai: id_l,
@@ -171,7 +188,7 @@ export const createMenuService = (data) => new Promise(async (resolve, reject) =
                 gia: data.gia,
                 anh_mon: data.anh_mon,
                 mo_ta: data.mo_ta,
-                id: v4()
+                // id: v4()
             
         })
         await response.save()

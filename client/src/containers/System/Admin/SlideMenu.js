@@ -3,10 +3,14 @@ import {
   ShopOutlined,
   ShoppingCartOutlined,
   UserOutlined,
+  TableOutlined,
+  OrderedListOutlined,
+  PayCircleOutlined
 } from "@ant-design/icons";
 import { Menu } from "antd";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { User } from "../../../components";
 
 function SideMenu() {
   const location = useLocation();
@@ -20,6 +24,7 @@ function SideMenu() {
   const navigate = useNavigate();
   return (
     <div className="py-5 flex flex-col ">
+      {/* <User/> */}
       <Menu
         className="SideMenuVertical"
         mode="vertical"
@@ -30,9 +35,14 @@ function SideMenu() {
         selectedKeys={[selectedKeys]}
         items={[
           {
-            label: "Dashbaord",
+            label: "Manage Statistics",
             icon: <AppstoreOutlined />,
-            key: "/",
+            key: "/admin/manage-statistics",
+          },
+          {
+            label: "Manage Booking",
+            icon: <AppstoreOutlined />,
+            key: "/admin/manage-booking",
           },
           {
             label: "Manage Menu",
@@ -48,6 +58,11 @@ function SideMenu() {
             label: "Manage Customers",
             key: "/admin/customers",
             icon: <UserOutlined />,
+          },
+          {
+            label: "Manage Tablle",
+            key: "/admin/manage-table",
+            icon: <PayCircleOutlined />,
           },
         ]}
       ></Menu>

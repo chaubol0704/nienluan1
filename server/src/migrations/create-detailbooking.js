@@ -21,9 +21,6 @@ module.exports = {
       id_book: {
         type: Sequelize.INTEGER
       },
-      id_bookMenu: {
-        type: Sequelize.INTEGER
-      },
       id_kh: {
         type: Sequelize.INTEGER
       },

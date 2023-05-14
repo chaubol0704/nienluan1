@@ -249,7 +249,7 @@ const SectionThucdon = () => {
                     </div>
                     </div>
                 </div>
-                </div>
+            </div>
 
             {/* section 4 */}
             <div className="section-content relative bg-white p-10">

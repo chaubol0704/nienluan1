@@ -13,7 +13,7 @@ const SliderComponent = ({arrImages}) => {
     className: 'z-10'
   };
   return (
-           <div className='w-full relative z-40'>
+           <div className='w-full relative z-5'>
               <Slider  {...settings}>
                   {arrImages.map((item) => {
                     return (

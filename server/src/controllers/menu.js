@@ -3,7 +3,8 @@ import * as menuService from  '../services/menu'
 
  export const getMenu = async (req, res ) => {
     try {
-        const respone = await menuService.getMenuService()
+        const id = req.id
+        const respone = await menuService.getMenuService(id)
         return res.status(200).json(respone)
     } catch (error) {
         return res.status(500).json({

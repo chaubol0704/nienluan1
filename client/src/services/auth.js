@@ -55,7 +55,7 @@ export const apiDeleteUser = (id) =>new Promise(async(resolve, reject)=> {
 })
 export const apiUpdateUser = (data) =>new Promise(async(resolve, reject)=> {
     try {
-        // console.log(data)
+        console.log(data)
         const respone = await axiosConfig({
             method: 'put',
             // url: `/api/v1/menu/limit?page=${page}`,

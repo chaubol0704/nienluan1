@@ -1,21 +1,49 @@
 import { Routes, Route } from "react-router-dom";
+import React, {useState,useEffect} from 'react'
 import { SliderComponent } from "./components";
 import {Home, Homepage, Login, DetailPost, Header,Footer, Menu, BookingTable} from './containers/Public'
 import {path} from './ultils/constant'
 import { System , CreatePost ,Admin, Customers} from './containers/System'
-
-import slider1 from './assets/img/SLIDER2.jpg'
-import slider2 from './assets/img/slider01.jpg'
-import slider3 from './assets/img/fzn_0370_ll12.jpg'
-import slider4 from './assets/img/menu.jpg'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import {useDispatch, useSelector} from 'react-redux'
+import moment from 'moment'
+import { apiUpdateTable } from "./services";
+import { apiCreateTable, apiSetTable, apiUploadImages , apiGetAll} from '../src/services';
+import * as actions from '../src/store/actions'
 
 function App() {
-  const arrImages=[slider1,slider2,slider3,slider4]
+    const formatDate = (time_book) => {
+        return moment(time_book).format("DD/MM/YYYY");
+    }
+    const {all} = useSelector((state) => state.book)
+    // const all = await apiGetAll()
+    let currentDate = new Date()
+    // console.log(formatDate(currentDate))
+    console.log(all)
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(actions.getAll())
+        console.log(all)
+        const interval = setInterval(() => {
+            all.map(async(item) => {
+              console.log(item)
+                console.log(formatDate(currentDate) > formatDate(item.time_book))
+                if(formatDate(currentDate) > formatDate(item.time_book)){
+                    let re = await apiSetTable({id:item?.bookban?.id_ban})
+                    console.log('so')
+                }
+              })
+        }, 86400000);
+
+      return () => clearInterval(interval);
+    },[]);
+  
   return (
     
     <div className="bg-primary w-full relative">
       <Header />
-      <SliderComponent  arrImages={arrImages} />
+      
       <Routes>
          <Route path={path.HOME} element={<Home/>}>
           < Route path={path.LOGIN} element={<Login/>} />  

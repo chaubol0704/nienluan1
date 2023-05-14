@@ -9,6 +9,9 @@ import Navigation from './Navigation';
 import menuManage from '../../ultils/menuManage';
 import icons from '../../ultils/icons';
 
+
+
+
 const {AiOutlineLogout , BsChevronDown} = icons
 
 const Header = () => {
@@ -21,8 +24,8 @@ const Header = () => {
     const navigate = useNavigate();
      const [searchParams] = useSearchParams()
     const headerRef = useRef()
-    const goLogin = useCallback((flag)=> {
-        navigate(path.LOGIN , {state:{flag} })  
+    const goLogin = useCallback((flag,showform)=> {
+        navigate(path.LOGIN , {state:{flag, showform} })  
     },[])
     // tro ve dau trang khi bam vao so phan trang
     useEffect(() => {
@@ -45,13 +48,13 @@ const Header = () => {
                             text={'Đăng nhập'}
                             textColor='text-white'
                             bgColor='bg-[#3961fb]'
-                            onClick={() => goLogin(false)}
+                            onClick={() => goLogin(false,true)}
                         />
                         <Button
                             text={'Đăng ký'}
                             textColor='text-white'
                             bgColor='bg-[#3961fb]'
-                            onClick={() => goLogin(true)}
+                            onClick={() => goLogin(true,true)}
                         />
                     </div>}
                  {isLoggedIn && 
@@ -96,6 +99,7 @@ const Header = () => {
                     </div>
                  }
             </div>
+           
             
         </div>
     );

@@ -13,6 +13,7 @@ export const apiGetMenu = () =>new Promise(async(resolve, reject)=> {
         reject(error)
     }
 })
+
 export const apiGetMenuLimit = (query) =>new Promise(async(resolve, reject)=> {
     try {
         console.log(query)

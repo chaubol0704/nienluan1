@@ -81,10 +81,10 @@ export const deletePost = async (req, res) => {
 export const createPost = async (req, res) => {
     const data = req.body
     try {
-        if (!data) return res.status(400).json({
-            err: 1,
-            msg: 'Missing inputs !'
-        })
+        // if (!data) return res.status(400).json({
+        //     err: 1,
+        //     msg: 'Missing inputs !'
+        // })
         const response = await postService.createPostService(data)
         return res.status(200).json(response)
 

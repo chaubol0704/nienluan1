@@ -4,7 +4,8 @@ const initState = {
     menu: [], 
     msg: '',
     count_menu: 0,
-    dataEdit: {}
+    dataEdit: {},
+    data: []
 }
 
 const menuReducer = (state= initState, action) => {
@@ -30,7 +31,11 @@ const menuReducer = (state= initState, action) => {
                 ...state,
                 dataEdit: action.dataEdit || {}
             }
-
+        case actionTypes.SAVEDATA:
+            return{
+                ...state,
+                data: action.data || []
+            }
         default:
             return state;
     }
